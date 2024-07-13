@@ -113,15 +113,17 @@ You can also get a static domain on ngrok and tunnel the traffic to our running 
 ngrok http --domain=<ngrok_static_domain_here> 5000
 ```
 
-![Alt text](image-3.png)
+![Alt text](image-4.png)
 
 Endpoints:
 
 Send Email: `GET /?sendmail=<email_address>`
 
 Queues an email sending task to the Celery worker.
-Log Time: GET /?talktome=true
-Logs the current timestamp to /var/logs/messaging_system.log.
+
+Log Time: `GET /?talktome=true`
+
+Logs the current timestamp to `/var/logs/messaging_system.log.`
 
 #
 
