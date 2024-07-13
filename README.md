@@ -8,9 +8,16 @@ The Messaging System application is designed to facilitate email sending and log
 
 #
 
-**Features**
+**Dependencies**
+
+- Flask: Web framework for building the HTTP endpoints.
+- Celery: Distributed task queueing system for handling asynchronous tasks.
+- Python-dotenv: For loading environment variables from a .env file.
+- Ngrok: Utility for exposing local servers to the internet via secure tunnels.
 
 #
+
+**Features**
 
 Email Sending:
 
@@ -80,8 +87,10 @@ sudo rabbitmqctl set_permissions -p myvhost myuser ".*" ".*" ".*"
 
 **Running the Application:**
 
+Start the Flask application;
+
 ```python
-Start the Flask application: python app.py.
+python3 app.py
 ```
 
 ![Alt text](image.png)
@@ -94,26 +103,49 @@ localhost:5000/?sendmail=<email_address> to send an email.
 
 The application runs locally by default. Use Ngrok to expose it publicly for testing or demonstration purposes.
 
+```sh
+ngrok http 5000
+```
+
+You can also get a static domain on ngrok and tunnel the traffic to our running flask application
+
+```bash
+ngrok http --domain=<ngrok_static_domain_here> 5000
+```
+
+![Alt text](image-3.png)
+
 Endpoints:
 
-Send Email: GET /?sendmail=<email_address>
+Send Email: `GET /?sendmail=<email_address>`
+
 Queues an email sending task to the Celery worker.
 Log Time: GET /?talktome=true
 Logs the current timestamp to /var/logs/messaging_system.log.
-Monitoring Tasks:
 
-Check task status: GET /task_status/<task_id>
+#
+
+**Monitoring Tasks:**
+
+Check task status: `GET /task_status/<task_id>`
 Returns the status (PENDING, SUCCESS, FAILURE) of the specified task.
-Security Considerations
+
+#
+
+**Security Considerations**
+
 Ensure sensitive information such as email credentials (EMAIL, PASSWORD) are securely stored and not exposed in code repositories.
+
 Use Ngrok carefully to expose the application to the internet, ensuring proper access controls and monitoring.
-Dependencies
-Flask: Web framework for building the HTTP endpoints.
-Celery: Distributed task queueing system for handling asynchronous tasks.
-Python-dotenv: For loading environment variables from a .env file.
-Ngrok: Utility for exposing local servers to the internet via secure tunnels.
-Future Improvements
+
+#
+
+**Future Improvements**
+
 Implement error handling and retry mechanisms for email sending tasks.
 Enhance logging with additional metadata for better traceability and debugging.
-Conclusion
+
+#
+
+**Conclusion**
 The Messaging System application leverages Flask and Celery to provide robust email sending and logging functionalities. It is designed to be scalable and adaptable, supporting various use cases from basic email notifications to complex task scheduling and management.
