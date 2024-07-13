@@ -14,7 +14,7 @@ load_dotenv()
 app = Flask(__name__)
 
 # Initialize Celery
-celery = Celery('tasks', broker='amqp://ogdmerlin:dyusuf1@3.92.133.203:5672//', backend='rpc://3.92.133.203')
+celery = Celery('tasks', broker='amqp://username:password@<localhost/serverip>:5672//', backend='rpc://IP_Address')
 
 # Update Celery configuration
 celery.conf.update(

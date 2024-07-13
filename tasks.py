@@ -16,7 +16,7 @@ SMTP_SERVER = os.getenv('SMTP_SERVER')
 SMTP_PORT = int(os.getenv('SMTP_PORT'))
 
 # Initialize Celery
-celery = Celery('tasks', broker='amqp://ogdmerlin:dyusuf1@3.92.133.203:5672//', backend='rpc://3.92.133.203')
+celery = Celery('tasks', broker='amqp://username:password@<localhost/serverip>//', backend='rpc://IP_address')
 
 # Update Celery configuration
 celery.conf.update(
