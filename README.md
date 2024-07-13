@@ -42,8 +42,38 @@ Task statuses include PENDING, SUCCESS, or FAILURE, providing real-time feedback
 
 Environment Setup:
 
-Clone the repository and install dependencies using pip install -r requirements.txt.
-Set up environment variables in a .env file for configuration (e.g., EMAIL, PASSWORD, SMTP_SERVER, SMTP_PORT).
+Clone the repository and install dependencies using;
+
+```pthon
+pip install -r requirements.txt.
+```
+
+Set up environment variables in a .env file for configuration (e.g., `EMAIL, PASSWORD, SMTP_SERVER, SMTP_PORT)`.
+
+Start the Celery task queueing;
+
+Start the Celery worker;
+
+```python
+celery -A tasks worker --loglevel=info
+```
+
+Start the RabbitMQ server
+
+```python
+sudo systemctl start rabbitmq-server
+```
+
+Configure the RabbitMQ server for Celery by creating a user, vhost, and setting permissions;
+
+```python
+sudo rabbitmqctl add_user myuser mypassword
+sudo rabbitmqctl set_user_tag myuser
+sudo rabbitmqctl set_permissions -p myvhost myuser ".*" ".*" ".*"
+```
+
+#
+
 Running the Application:
 
 Start the Flask application: python app.py.
