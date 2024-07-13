@@ -54,19 +54,23 @@ Start the Celery task queueing;
 
 Start the Celery worker;
 
-```python
+```sh
 celery -A tasks worker --loglevel=info
 ```
 
+![Alt text](image-1.png)
+
 Start the RabbitMQ server
 
-```python
+```sh
 sudo systemctl start rabbitmq-server
 ```
 
+![Alt text](image-2.png)
+
 Configure the RabbitMQ server for Celery by creating a user, vhost, and setting permissions;
 
-```python
+```sh
 sudo rabbitmqctl add_user myuser mypassword
 sudo rabbitmqctl set_user_tag myuser
 sudo rabbitmqctl set_permissions -p myvhost myuser ".*" ".*" ".*"
@@ -74,13 +78,22 @@ sudo rabbitmqctl set_permissions -p myvhost myuser ".*" ".*" ".*"
 
 #
 
-Running the Application:
+**Running the Application:**
 
+```python
 Start the Flask application: python app.py.
-Start the Celery worker for task processing: celery -A tasks worker --loglevel=info.
+```
+
+![Alt text](image.png)
+
 Accessing the Application:
 
+```
+localhost:5000/?sendmail=<email_address> to send an email.
+```
+
 The application runs locally by default. Use Ngrok to expose it publicly for testing or demonstration purposes.
+
 Endpoints:
 
 Send Email: GET /?sendmail=<email_address>
